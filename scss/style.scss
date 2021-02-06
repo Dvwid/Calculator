@@ -1,0 +1,116 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Roboto Mono", monospace;
+}
+.container {
+	height: 100vh;
+	width: 100%;
+}
+.calculator {
+	display: flex;
+	flex-direction: column;
+	background-color: #232323;
+	height: 100vh;
+	width: 100%;
+	justify-content: space-around;
+	&__score_display {
+		height: 20vh;
+		width: 100%;
+		p {
+			display: flex;
+			justify-content: flex-end;
+			align-items: flex-end;
+			padding-right: 1.5vw;
+			color: white;
+			width: 100%;
+			height: 20vh;
+			font-size: 20vw;
+		}
+	}
+	&__buttons {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		height: 144vw;
+		justify-content: center;
+
+		p {
+			color: white;
+			background-color: #070707;
+			height: 24vw;
+			width: 24vw;
+			font-size: 7vw;
+			text-align: center;
+			line-height: 24vw;
+			border: 1px solid #232323;
+		}
+		p:hover {
+			background-color: #14446a;
+		}
+		.calculator__buttons__operator {
+			background-color: #151516;
+		}
+	}
+}
+
+@media (min-width: 1024px) {
+	body {
+		background: radial-gradient(
+			circle,
+			rgba(179, 179, 179, 1) 0%,
+			rgba(230, 230, 230, 1) 100%
+		);
+	}
+	.calculator {
+		position: relative;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: flex;
+		flex-direction: column;
+		background-color: #232323;
+		height: 45vw;
+		width: 21%;
+		justify-content: space-between;
+		&__score_display {
+			height: 12vw;
+			width: 100%;
+			p {
+				display: flex;
+				justify-content: flex-end;
+				align-items: flex-end;
+				padding-right: 1.5vw;
+				color: white;
+				width: 100%;
+				height: 12vw;
+				font-size: 3vw;
+			}
+		}
+		&__buttons {
+			display: flex;
+			flex-wrap: wrap;
+			width: 100%;
+			height: 30vw;
+			justify-content: center;
+			margin-bottom: 0.6vw;
+			p {
+				color: white;
+				background-color: #070707;
+				height: 5vw;
+				width: 5vw;
+				font-size: 1.5vw;
+				text-align: center;
+				line-height: 5vw;
+				border: 1px solid #232323;
+			}
+			p:hover {
+				background-color: #14446a;
+			}
+			.calculator__buttons__operator {
+				background-color: #151516;
+			}
+		}
+	}
+}
