@@ -65,8 +65,12 @@ const calculate = (value1, value2, operator) => {
 				fullScore += value2;
 			}
 		} else {
-			firstValue = lastScore;
-			secondValue = 0;
+			if (lastScore === 0) {
+				lastScore = firstValue;
+			} else {
+				firstValue = lastScore;
+				secondValue = 0;
+			}
 		}
 	} else if (operator === "-") {
 		if (!calcIsDone) {
@@ -78,8 +82,12 @@ const calculate = (value1, value2, operator) => {
 				fullScore -= value2;
 			}
 		} else {
-			firstValue = lastScore;
-			secondValue = 0;
+			if (lastScore === 0) {
+				lastScore = firstValue;
+			} else {
+				firstValue = lastScore;
+				secondValue = 0;
+			}
 		}
 	} else if (operator === "*") {
 		if (!calcIsDone) {
@@ -90,8 +98,12 @@ const calculate = (value1, value2, operator) => {
 				fullScore *= value2;
 			}
 		} else {
-			firstValue = lastScore;
-			secondValue = 0;
+			if (lastScore === 0) {
+				lastScore = firstValue;
+			} else {
+				firstValue = lastScore;
+				secondValue = 0;
+			}
 		}
 	} else if (operator === "/") {
 		if (!calcIsDone) {
@@ -106,11 +118,20 @@ const calculate = (value1, value2, operator) => {
 				screen.textContent = "Nie można dzielić przez 0";
 			}
 		} else {
+			if (lastScore === 0) {
+				lastScore = firstValue;
+			} else {
+				firstValue = lastScore;
+				secondValue = 0;
+			}
+		}
+	} else if (operator === "=") {
+		if (lastScore === 0) {
+			lastScore = firstValue;
+		} else {
 			firstValue = lastScore;
 			secondValue = 0;
 		}
-	} else if (operator === "=") {
-		firstValue = lastScore;
 	}
 
 	calcIsDone = true;
