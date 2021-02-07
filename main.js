@@ -41,9 +41,12 @@ checkScore = () => {
 };
 
 const addNumbersToScreen = (element) => {
-	if (calcIsDone) {
+	if (calcIsDone && !screen.textContent.includes("0.")) {
 		screen.textContent = "";
 		calcIsDone = false;
+	} else {
+		calcIsDone = false;
+		console.log(screen.textContent);
 	}
 	if (screen.textContent.length < 23) {
 		screen.textContent += element;
@@ -64,7 +67,6 @@ const calculate = (value1, value2, operator) => {
 		} else {
 			firstValue = lastScore;
 			secondValue = 0;
-			console.log(firstValue);
 		}
 	} else if (operator === "-") {
 		if (!calcIsDone) {
@@ -78,7 +80,6 @@ const calculate = (value1, value2, operator) => {
 		} else {
 			firstValue = lastScore;
 			secondValue = 0;
-			console.log(firstValue);
 		}
 	} else if (operator === "*") {
 		if (!calcIsDone) {
@@ -91,7 +92,6 @@ const calculate = (value1, value2, operator) => {
 		} else {
 			firstValue = lastScore;
 			secondValue = 0;
-			console.log(firstValue);
 		}
 	} else if (operator === "/") {
 		if (!calcIsDone) {
@@ -108,7 +108,6 @@ const calculate = (value1, value2, operator) => {
 		} else {
 			firstValue = lastScore;
 			secondValue = 0;
-			console.log(firstValue);
 		}
 	} else if (operator === "=") {
 		firstValue = lastScore;
@@ -124,7 +123,6 @@ const calculate = (value1, value2, operator) => {
 };
 
 const specialFunction = (element) => {
-	console.log(element);
 	if (element === "C") {
 		firstOperator = "";
 		secondOperator = "";
@@ -148,7 +146,6 @@ const specialFunction = (element) => {
 				0,
 				screen.textContent.length - 1
 			);
-			console.log("xd");
 		}
 
 		if (screen.textContent === "") {
@@ -190,8 +187,6 @@ const setOperator = (element) => {
 		firstOperator !== element &&
 		screen.textContent !== ""
 	) {
-		console.log(element);
-
 		firstValue = lastScore;
 		secondValue = parseFloat(screen.textContent);
 
@@ -263,7 +258,7 @@ const buttonHandleClick = function () {
 	let element = this.textContent;
 	if (element >= 0 && element < 10) {
 		if (screen.textContent === "0" && element === "0") {
-			console.log("Chce przypisać 0");
+			screen.textContent = "0";
 		} else {
 			addNumbersToScreen(element);
 		}
