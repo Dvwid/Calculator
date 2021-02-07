@@ -8,13 +8,48 @@ let secondOperator = "";
 let lastScore = 0;
 let fullScore = 0;
 let calcIsDone = true;
+let device = "desktop";
+
+checkScore = () => {
+	if (device === "desktop") {
+		if (screen.textContent.length < 10) {
+			screen.style.fontSize = "3vw";
+		} else if (
+			screen.textContent.length >= 10 &&
+			screen.textContent.length <= 15
+		) {
+			screen.style.fontSize = "2vw";
+		} else if (screen.textContent < 25) {
+			screen.style.fontSize = "1.8vw";
+		} else {
+			screen.style.fontSize = "1.4vw";
+		}
+	} else {
+		if (screen.textContent.length < 7) {
+			screen.style.fontSize = "20vw";
+		} else if (
+			screen.textContent.length >= 7 &&
+			screen.textContent.length <= 10
+		) {
+			screen.style.fontSize = "14vw";
+		} else if (screen.textContent < 25) {
+			screen.style.fontSize = "9vw";
+		} else {
+			screen.style.fontSize = "6vw";
+		}
+	}
+};
 
 const addNumbersToScreen = (element) => {
 	if (calcIsDone) {
 		screen.textContent = "";
 		calcIsDone = false;
 	}
-	screen.textContent += element;
+	if (screen.textContent.length < 23) {
+		screen.textContent += element;
+	}
+
+	checkScore();
 };
 
 const calculate = (value1, value2, operator) => {
@@ -41,11 +76,15 @@ const calculate = (value1, value2, operator) => {
 			fullScore *= value2;
 		}
 	} else if (operator === "/") {
-		lastScore = value1 / value2;
-		if (fullScore === 0) {
-			fullScore += lastScore;
+		if (value2 !== 0) {
+			lastScore = value1 / value2;
+			if (fullScore === 0) {
+				fullScore += lastScore;
+			} else {
+				fullScore /= value2;
+			}
 		} else {
-			fullScore /= value2;
+			screen.textContent = "Nie można dzielić przez 0";
 		}
 	} else if (operator === "=") {
 		console.log(secondOperator);
@@ -57,6 +96,57 @@ const calculate = (value1, value2, operator) => {
 	secondValue = "";
 	firstOperator = secondOperator;
 	secondOperator = "";
+	checkScore();
+};
+
+const specialFunction = (element) => {
+	console.log(element);
+	if (element === "C") {
+		firstOperator = "";
+		secondOperator = "";
+		lastScore = 0;
+		fullScore = 0;
+		firstValue = "";
+		secondValue = "";
+		calcIsDone = true;
+		screen.textContent = fullScore;
+	} else if (element === "CE") {
+		screen.textContent = 0;
+		calcIsDone = true;
+	} else if (element === "%") {
+		if (firstValue !== "") {
+			secondValue = firstValue * (screen.textContent / 100);
+			screen.textContent = secondValue;
+		}
+	} else if (element === "DEL") {
+		if (screen.textContent !== "0" && screen.textContent !== "") {
+			screen.textContent = screen.textContent.slice(
+				0,
+				screen.textContent.length - 1
+			);
+			console.log("xd");
+		}
+
+		if (screen.textContent === "") {
+			screen.textContent = 0;
+			calcIsDone = true;
+		}
+	} else if (element === "1/x") {
+		screen.textContent = 1 / screen.textContent;
+	} else if (element === "x2") {
+		screen.textContent = screen.textContent * screen.textContent;
+	} else if (element === "√") {
+		screen.textContent = Math.sqrt(screen.textContent);
+	} else if (element === "+/-") {
+		screen.textContent = screen.textContent * -1;
+	} else if (element === ",") {
+		if (screen.textContent.includes(".")) {
+			throw Error("Item already contains a comma");
+		} else {
+			screen.textContent += ".";
+		}
+	}
+	checkScore();
 };
 
 const setOperator = (element) => {
@@ -67,7 +157,7 @@ const setOperator = (element) => {
 		firstValue === ""
 	) {
 		firstValue = 0;
-		calculate(firstValue, parseInt(screen.textContent), firstOperator);
+		calculate(firstValue, parseFloat(screen.textContent), firstOperator);
 		firstOperator = element;
 	} else if (
 		firstValue === "" &&
@@ -79,7 +169,7 @@ const setOperator = (element) => {
 		console.log(element);
 
 		firstValue = lastScore;
-		secondValue = parseInt(screen.textContent);
+		secondValue = parseFloat(screen.textContent);
 
 		if (element !== "*" && firstOperator !== "*") {
 			console.log(
@@ -106,7 +196,6 @@ const setOperator = (element) => {
 		}
 		firstOperator = element;
 	} else if (
-		// tu coś poszperać
 		firstValue !== "" &&
 		screen.textContent !== "" &&
 		firstOperator !== element &&
@@ -114,30 +203,30 @@ const setOperator = (element) => {
 		calcIsDone === true
 	) {
 		if (screen.textContent === "0") {
-			console.log("hahahaha");
+			console.log("?");
 		}
 
-		secondValue = parseInt(screen.textContent);
+		secondValue = parseFloat(screen.textContent);
 		calculate(firstValue, secondValue, firstOperator);
 		firstOperator = element;
 	} else if (firstOperator !== element && firstOperator !== "") {
-		secondValue = parseInt(screen.textContent);
+		secondValue = parseFloat(screen.textContent);
 		calculate(firstValue, secondValue, firstOperator);
 		screen.textContent = fullScore;
 		firstOperator = element;
 	} else if (firstValue === "") {
 		if (fullScore !== 0) {
 			firstValue = fullScore;
-			secondValue = parseInt(screen.textContent);
+			secondValue = parseFloat(screen.textContent);
 			calculate(firstValue, secondValue, firstOperator);
 		}
 
-		firstValue = parseInt(screen.textContent);
+		firstValue = parseFloat(screen.textContent);
 		firstOperator = element;
 		screen.textContent = fullScore;
 		calcIsDone = true;
 	} else if (secondValue === "") {
-		secondValue = parseInt(screen.textContent);
+		secondValue = parseFloat(screen.textContent);
 		secondOperator = element;
 
 		calculate(firstValue, secondValue, firstOperator);
@@ -162,9 +251,30 @@ const buttonHandleClick = function () {
 		element === "="
 	) {
 		setOperator(element);
+	} else if (
+		element === "CE" ||
+		element === "%" ||
+		element === "C" ||
+		element === "DEL" ||
+		element === "1/x" ||
+		element === "x2" ||
+		element === "√" ||
+		element === "+/-" ||
+		element === ","
+	) {
+		specialFunction(element);
 	}
 };
 
 buttons.forEach((button) => {
 	button.addEventListener("click", buttonHandleClick);
 });
+
+checkDevice = () => {
+	if (this.screen.width > 1024) {
+		device = "desktop";
+	} else {
+		device = "mobile";
+	}
+};
+window.onload = checkDevice();
