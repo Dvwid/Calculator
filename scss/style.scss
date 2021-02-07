@@ -5,18 +5,20 @@
 	font-family: "Roboto Mono", monospace;
 }
 .container {
-	height: 100vh;
+	height: 80vh;
 	width: 100%;
 }
 .calculator {
+	margin-top: 2vh;
+	margin-bottom: 2vh;
 	display: flex;
 	flex-direction: column;
 	background-color: #232323;
-	height: 100vh;
+	height: 96vh;
 	width: 100%;
 	justify-content: space-around;
 	&__score_display {
-		height: 20vh;
+		height: 18vh;
 		width: 100%;
 		p {
 			display: flex;
@@ -50,7 +52,7 @@
 			background-color: #14446a;
 		}
 		.calculator__buttons__operator {
-			background-color: #151516;
+			background-color: red;
 		}
 	}
 }
