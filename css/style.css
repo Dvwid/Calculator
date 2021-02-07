@@ -6,12 +6,17 @@
   font-family: "Roboto Mono", monospace;
 }
 
+body {
+  background-color: #232323;
+}
+
 .container {
-  height: 100vh;
+  height: 80vh;
   width: 100%;
 }
 
 .calculator {
+  margin: 4vh 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -20,7 +25,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   background-color: #232323;
-  height: 100vh;
+  height: 92vh;
   width: 100%;
   -ms-flex-pack: distribute;
       justify-content: space-around;
@@ -41,7 +46,7 @@
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  padding-right: 1.5vw;
+  padding-right: 7vw;
   color: white;
   width: 100%;
   height: 20vh;
@@ -64,11 +69,11 @@
 .calculator__buttons p {
   color: white;
   background-color: #070707;
-  height: 24vw;
-  width: 24vw;
+  height: 21vw;
+  width: 21vw;
   font-size: 7vw;
   text-align: center;
-  line-height: 24vw;
+  line-height: 21vw;
   border: 1px solid #232323;
 }
 
