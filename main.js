@@ -54,40 +54,64 @@ const addNumbersToScreen = (element) => {
 
 const calculate = (value1, value2, operator) => {
 	if (operator === "+") {
-		lastScore = value1 + value2;
-		if (fullScore === 0) {
-			fullScore += lastScore;
-		} else {
-			fullScore += value2;
-		}
-	} else if (operator === "-") {
-		lastScore = value1 - value2;
-
-		if (fullScore === 0) {
-			fullScore = lastScore;
-		} else {
-			fullScore -= value2;
-		}
-	} else if (operator === "*") {
-		lastScore = value1 * value2;
-		if (fullScore === 0) {
-			fullScore += lastScore;
-		} else {
-			fullScore *= value2;
-		}
-	} else if (operator === "/") {
-		if (value2 !== 0) {
-			lastScore = value1 / value2;
+		if (!calcIsDone) {
+			lastScore = value1 + value2;
 			if (fullScore === 0) {
 				fullScore += lastScore;
 			} else {
-				fullScore /= value2;
+				fullScore += value2;
 			}
 		} else {
-			screen.textContent = "Nie można dzielić przez 0";
+			firstValue = lastScore;
+			secondValue = 0;
+			console.log(firstValue);
+		}
+	} else if (operator === "-") {
+		if (!calcIsDone) {
+			lastScore = value1 - value2;
+
+			if (fullScore === 0) {
+				fullScore = lastScore;
+			} else {
+				fullScore -= value2;
+			}
+		} else {
+			firstValue = lastScore;
+			secondValue = 0;
+			console.log(firstValue);
+		}
+	} else if (operator === "*") {
+		if (!calcIsDone) {
+			lastScore = value1 * value2;
+			if (fullScore === 0) {
+				fullScore += lastScore;
+			} else {
+				fullScore *= value2;
+			}
+		} else {
+			firstValue = lastScore;
+			secondValue = 0;
+			console.log(firstValue);
+		}
+	} else if (operator === "/") {
+		if (!calcIsDone) {
+			if (value2 !== 0) {
+				lastScore = value1 / value2;
+				if (fullScore === 0) {
+					fullScore += lastScore;
+				} else {
+					fullScore /= value2;
+				}
+			} else {
+				screen.textContent = "Nie można dzielić przez 0";
+			}
+		} else {
+			firstValue = lastScore;
+			secondValue = 0;
+			console.log(firstValue);
 		}
 	} else if (operator === "=") {
-		console.log(secondOperator);
+		firstValue = lastScore;
 	}
 
 	calcIsDone = true;
