@@ -12,7 +12,7 @@ body {
 	width: 100%;
 }
 .calculator {
-	margin: 4vh 0;
+	margin-bottom: 4vh;
 	display: flex;
 	flex-direction: column;
 	background-color: #232323;
@@ -20,7 +20,7 @@ body {
 	width: 100%;
 	justify-content: space-around;
 	&__score_display {
-		height: 20vh;
+		height: 18vh;
 		width: 100%;
 		p {
 			display: flex;
@@ -29,7 +29,7 @@ body {
 			padding-right: 7vw;
 			color: white;
 			width: 100%;
-			height: 20vh;
+			height: 18vh;
 			font-size: 20vw;
 		}
 	}
